@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+    <script>
+        var Plane = function(){
+            this.a = 10;
+            this.b = 1;
+        }
+
+        var plane = new Plane();
+        plane.a = 100;
+        plane.b = 20;
+
+        //IE8不支持create()
+
+        Object.create = Object.create || function(obj){
+            var F = function(){};
+            F.prototype = obj;
+            return new F();
+        }
+
+        var clonePlane = Object.create(plane);
+        console.log(clonePlane.a)
+    </script>
+    </body>
+</html>

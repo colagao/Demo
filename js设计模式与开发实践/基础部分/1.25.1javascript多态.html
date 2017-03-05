@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+    <script>
+        var baiduMap = {
+            show:function(){
+                console.log('百度地图');
+            }
+        }
+
+        var googleMap = {
+            show:function(){
+                console.log('google地图');
+            }
+        }
+        var renderMap = function(type){
+            if(type == 'baidu'){
+                baiduMap.show();
+            }else if(type == 'google'){
+                googleMap.show();
+            }
+        }
+        renderMap('baidu');
+        renderMap('google');
+    </script>
+    </body>
+</html>

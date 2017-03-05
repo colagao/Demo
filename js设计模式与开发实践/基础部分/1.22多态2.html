@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <script>
+            /*
+                多态的含义：同一操作作用于不同对象上，会有不同的执行结果。
+                多态的思想：将“做什么” 与 “谁在做以及怎么做” 分离开来。
+            */
+
+            var makeSound = function(animal){
+                animal.sound();
+            }
+            var Duck = function(){};
+            Duck.prototype.sound = function(){
+                console.log('呱呱呱');
+            };
+
+            var Chicken = function(){};
+            Chicken.prototype.sound = function(){
+                console.log('咯咯咯');
+            }
+
+            makeSound(new Duck());
+            makeSound(new Chicken());
+        </script>
+    </body>
+</html>

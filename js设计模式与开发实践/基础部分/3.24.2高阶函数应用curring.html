@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+         <p>每天记录零花钱，最后结算;curring实现</p>
+    <script>
+
+        var curring = function(fn){
+            var args = [];
+            return function(){
+               
+                if(arguments.length == 0){
+                    return fn.apply(this,args);
+                }else{
+                    Array.prototype.push.apply(args,arguments);
+                    console.log(arguments)
+                   // return arguments.callee; 
+                }
+                 
+            }
+        }
+
+       var cost = (function(){
+           
+           return function(){
+                var money = 0;
+                for(var i=0;i<arguments.length;i++){
+                    money += arguments[i]
+                }
+               // console.log(arguments);
+                return money;
+           }
+       })()
+
+       var cost = curring(cost);
+       console.log('第一天》》》》'+cost(100));
+       cost(200);
+       console.log('总数》》》》'+cost());
+    </script>
+    </body>
+</html>

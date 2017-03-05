@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+         <div id="div1">我是一个 div</div>
+    <script>
+    
+        //利用 apply 把 document 当作 this 传入 getId 函数
+        document.getElementById = (function( func ){
+            return function(){
+                return func.apply( document, arguments );
+            }
+        })( document.getElementById );
+        var getId = document.getElementById;
+        var div = getId('div1');
+        console.log(div.id);
+    </script>
+    </body>
+</html>

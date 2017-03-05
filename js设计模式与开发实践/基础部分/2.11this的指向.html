@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+    <script>
+    /*1.作为对象的属性调用*/
+        var person = {
+            name:'jack',
+            getName:function(){
+                console.log(this.name);
+            }
+        }
+        var name = 'Tom';
+        person.getName();           //jack
+
+    /*2.作为普通函数调用*/
+    var getMyName  = function(){
+        var myName = "Lary";
+        return this.myName;
+    }
+
+    var myName = 'Bob';
+    console.log(getMyName());          //Bob
+
+
+    /*3.作为构造函数调用*/    
+
+        //1
+    var Student = function(){
+        this.holeName = 'Marry'
+    }
+    var holeName = 'Lala';
+    var aStudent = new Student();
+    console.log(aStudent.holeName);    //Marry
+ 
+        //2.显示返回对象
+    var Animal = function(){
+        this.animalName = 'tiger';
+        return {
+            animalName:'cat'
+        }
+    }
+    var animalName = 'dog'
+    var aAnimal = new Animal();
+    console.log(aAnimal.animalName);     //cat
+
+     /*4.call与apply调用*/ 
+     var obj1 = {
+        name: 'seven',
+        getName: function(){
+            return this.name;
+        }
+     }  
+     var obj2 = {
+         name:'KIKI'
+     }
+     console.log(obj1.getName());                   //seven
+     console.log(obj1.getName.call(obj2));          //KIKI
+    </script>
+    </body>
+</html>
