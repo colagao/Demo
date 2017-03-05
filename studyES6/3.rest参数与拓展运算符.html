@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   
+</body>
+<script >
+// ****************************  rest参数  ********************************************
+    //rest参数是将剩余的参数存入数组中
+    function add(...value){
+        let sum = 0;
+        for(let i of value){
+            sum +=i;
+        }
+        return sum;
+    }
+
+    console.log(add(2,3,4));
+
+    function sortNumber(){
+        return Array.prototype.slice.call(arguments).sort();
+    }
+
+    //rest写法
+    const sortNumbers = (...numbers)=>numbers.sort();
+
+    //以前需要将参数转换成数组的方法现在都能用rest参数替换了
+
+    // **************************** 拓展运算符    *************************************************
+
+    //代替apply
+    //es5
+    let a = Math.max.apply(null,[12,3,8]);
+    console.log(a);
+    //es6
+    let b = Math.max(...[12,3,8])
+    console.log(b);
+
+    //合并数组
+    //es5
+    let arr1 = [1,2,3];
+    let arr2 = [4,5,6];
+    console.log(arr1.concat(arr2));
+
+    //es6
+    console.log([...arr1,...arr2]);
+
+    [...'hello']   //["h", "e", "l", "l", "o"]
+
+    let str2 = 'wwwcccwcwcdsd';
+    console.log(str2.split('').reverse().join(''));
+    console.log([...str2].reverse().join(''));
+</script>
+</html>

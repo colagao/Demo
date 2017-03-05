@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script >
+
+    //默认值生效的条件是，对象的属性值严格等于undefined。
+
+    //这是对x,y设置默认值,函数的默认值是空对象，但是设置了对象解构赋值的默认值
+    function move({x = 0, y = 0} = {}) {
+        return [x, y];
+    }
+    
+    console.log( move({x: 3, y: 8})); // [3, 8]
+    console.log( move({x: 3})); // [3, 0]
+    console.log( move({})); // [0, 0]
+    console.log( move()); // [0, 0]
+
+    console.log('=======')
+    //这里是为move2函数指定默认参数（关注整体），而不是为变量p,q指定默认值
+    function move2({p,q} = {p:0,q:0}){
+        return [p,q];
+    }
+    console.log(move2({p:3,q:8})); //[3,8]
+    console.log(move2({p: 3}))   //[3,undefined]
+    console.log(move2({}))     //[undefined,undefined]
+    console.log(move2())     //[0,0]
+    
+
+</script>
+</html>

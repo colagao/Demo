@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   
+</body>
+<script >
+// ****************************  表示方法  ********************************************
+   let sum1 = (num1,num2)=>{
+       return num1+num2;
+   }
+
+   //错层嵌套
+  function insert(value) {
+        return {into: function (array) {
+            return {after: function (afterValue) {
+                array.splice(array.indexOf(afterValue) + 1, 0, value);
+                return array;
+            }};
+        }};
+    }
+
+    let insert2 = (value)=>({into:(array)=> ({after:(afterValue)=>{
+        array.splice(array.indexOf(afterValue) + 1, 0, value);
+        return array;
+    }})})
+
+
+
+// ****************************  注意点  ********************************************
+
+    function foo3() {
+        setTimeout(() => {
+            console.log('args:', arguments);
+        }, 100);
+    }
+    foo3(2, 4, 6, 8)
+</script>
+</html>

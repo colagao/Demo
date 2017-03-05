@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script >
+
+    //解析字符串
+   let {length:len} = 'hello';
+   console.log(len); //5  此时字符串被解析为类似数组的对象
+
+
+   let arr = [1,2,3,4]
+   let {0:first,[arr.length-1]:last} = arr;
+
+   //解析数组
+   //由于数组本质是特殊的对象，因此可以对数组进行对象属性的解构。
+   console.log("first:"+first+"===last:"+last); 
+
+
+    //    用于解析json
+   let jsonData = {
+       id:44,
+       status:'OK',
+       data:['第一','wowowo']
+   }
+
+   let {id,status,data} = jsonData;
+   console.log(id,status,data);
+</script>
+</html>

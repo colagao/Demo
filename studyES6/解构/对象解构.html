@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script >
+    let {foo:baz} = {foo:'aaa',bar:'bbb'};
+    console.log("baz:"+baz); //aaa
+
+    let {x:y = 3} = {x: 5};
+    console.log("y:"+y);   //5
+
+
+
+    let x=1;let z=2;
+    [x,z] = [z,x]
+    console.log("x:"+x+"===z:"+z);  //x:2,z:1
+
+    let {m,n,o} = {o:3,n:1,m:2};
+    console.log("m:"+m+">>n:"+n+">>o:"+o); //对象解构是有序的,会找对应的key值
+</script>
+</html>

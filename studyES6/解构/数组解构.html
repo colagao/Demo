@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <h1>数组解构赋值</h1>
+</head>
+<body>
+
+</body>
+<script >
+    let [x,y,...a] = ['a'];
+    console.log('x:'+x); //a
+    console.log('y:'+y); //undefined
+    console.log('a:'+a); //[]
+
+    let [x1,y1='b'] = ['a','c'];
+    console.log('x1:'+x1); //a
+    console.log('y1:'+y1); //c
+</script>
+</html>

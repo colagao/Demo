@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   
+</body>
+<script >
+
+
+    let a = {
+        foo: 1,
+        bar: function() { console.log(this.foo) }
+    }
+
+    a.bar()  //1
+   
+   //使用箭头函数：箭头函数中的 this 并不是指向当前这个对象
+   let b = {
+        foo: 1,
+        bar: () => console.log(this.foo)
+    }
+
+    b.bar()  //undefined
+
+
+// ****************************  ********************************************
+
+    function foo(){
+        var number = 44;
+        console.log('foo:'+this.number);
+        setTimeout(()=>{
+            var number = 55;
+            console.log(this.number);
+            console.log(this);
+        },1000)
+    }
+    var number = 22;
+    foo();
+    foo.call({number:88});
+</script> 
+</html>
