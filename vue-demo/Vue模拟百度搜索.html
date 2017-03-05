@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+        <script src="//cdn.bootcss.com/vue/2.1.2/vue.min.js"></script>
+        <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+        <style>
+            .active{ background: #ccc;}
+            .wrap{display:inline-block;}
+        </style>
+	</head>
+	<body>
+		<div id="app">
+            <div class="content">
+                <span class="wrap">
+                    <input type="text"  v-model="msg" @keyup="show($event)" @keydown.down="changeDown" @keydown.up.prevent="changeUp"/>
+                </span ><span class="wrap">
+                    <input type="button" value="搜索" @click="search()"/>
+                </span>
+                <ul>
+                    <li v-for="(item,$index) in myData" :class="{active:$index == now}">
+                       {{item}}
+                    </li>
+                </ul>
+                <p v-show="myData.length == 0">暂无数据...</p>
+            </div>
+		</div>
+	</body>
+	<script>
+		window.onload=function(){
+			new Vue({
+				el:'#app',
+				data:{
+					msg:'',
+                    myData:[],
+                    oldKeyWord:'',
+                    now:-1
+				},
+				methods:{
+					show(ev){
+					    var self = this;
+					    //上下选择时不请求数据
+                        if(ev.keyCode == 38 || ev.keyCode == 40)return;
+                        //回车键查询并在新页面显示
+                        if(ev.keyCode == 13){
+                            this.search();
+                        }
+						$.ajax({
+						    url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+                            type:'get',
+                            dataType : "jsonp",
+                            jsonp:'cb',
+                            data:{
+                                wd: this.msg
+                            }
+                        }).then(function(resp){
+                            //console.log(resp);
+                            self.myData = resp.s;
+                            self.now = -1;
+                            self.oldKeyWord = self.msg;
+                            console.log( self.oldKeyWord);
+						},function(resp){
+							console.log(resp);
+						});
+					},
+                    changeDown(){
+					    this.now++;
+                        if(this.now == this.myData.length){
+                            this.now = -1;
+                            this.msg = this.oldKeyWord;
+                        }else {
+                            this.msg = this.myData[this.now];
+                        }
+                    },
+                    changeUp(){
+                        this.now--;
+                        if(this.now == -2){
+                            this.now = this.myData.length-1;
+                        }
+                        if(this.now == -1){
+                            this.msg = this.oldKeyWord;
+                        } else{
+                            this.msg = this.myData[this.now];
+                        }
+                    },
+                    search(){
+                        var self = this;
+                        window.open('http://www.baidu.com/s?wd='+self.msg);
+                        self.msg = '';
+                        self.now = -1;
+                        self.myData = [];
+                    }
+				}
+			});
+		}
+	</script>
+
+</html>
