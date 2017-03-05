@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            *{margin:0;padding:0;}
+            .wrap{padding:10px;display: flex;display: -webkit-flex;flex-direction: column;}
+            .img_item{width: 65px;height: 90px;border:1px solid blue;}
+            .img_wrap{margin-right: 10px;}
+            .btm p{text-align: center;}
+            .top{display: flex;}
+            .info_wrap{flex: 1;overflow: hidden;}
+            .info_wrap h2,.info_wrap p{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+            .btn_buy{margin: 30px 15px 0 0;}
+        </style>
+    </head>
+    <body>
+        <div class="wrap">
+            <!--首先是上下结构-->
+            <div class="top">
+                <!--默认row排列-->
+                <div class="img_wrap"><div class="img_item"></div></div>
+
+                <div class="info_wrap">
+                    <h3>这是title</h3>
+                    <p>导演：D·J·卡卢索</p>
+                    <p>主演：范·迪塞尔 甄子丹</p>
+                </div>
+
+                <a class="btn_buy">购票</a>
+            </div>
+            <!--下-->
+            <div class="btm">
+                <p> 新人特惠，名额有限抢完即止</p>
+            </div>
+        </div>
+    </body>
+</html>

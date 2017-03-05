@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            .example{margin:20px 0;}
+            .box{display: flex;width:600px;height: 200px;background-color: #ccc;margin:40px  0 0 100px; }
+            .box div{padding:5px;}
+            .left{flex: 1;order: 1;}
+            .right{flex: 1;order: 1;}
+            .bd1{background-color: #ccc;border:1px solid cadetblue;}
+            .bd2{background-color: lightpink;border:1px solid brown;}
+            .cutLine{flex:1;background-color: lightpink;order: 0;}
+            .grow2{flex-grow: 2;}   .grow3{flex-grow: 3;}          
+            .shrink0{flex-shrink: 0} .shrink1{flex-shrink: 1}  .shrink2{flex-shrink: 2}
+            .basis1{flex-basis: auto;}  .basis2{flex-basis: auto;}
+        </style>
+    </head>
+    <body>
+        <div class="example">
+            <h3>子项目用flex等于1平分容器</h3>
+            <div class="box">
+                <div class="left bd1">我想待在左边</div>
+                <div class="right bd2">我想在右边</div>
+            </div>
+        </div>
+
+
+        <div class="example">
+            <h3>项目中的order属性：</h3>
+            <div class="box">
+                <div class="left bd1">我想待在左边</div>
+                <div class="right bd2">我想在右边</div>
+                <div class="cutLine">我想用自己的order属性插个队</div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h3>项目中的flex-grow属性（默认为0），就是决定item自身占所有份数中的几等份：</h3>
+            <div class="box">
+                <div class="grow2 bd1">我想占2份</div>
+                <div class="grow2 bd1">我想占2份</div>
+                <div class="grow3 bd2">我想占3份</div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h3>项目中的flex-shrink属性（默认为1），就是决定空间不够的时候是否等比例缩小：</h3>
+            <p>
+                <b>备注：</b>在父容器宽度发生变化时（如果writing-mode: vertical-rl;则是高度），flex-shrink值最小的那一个宽度不变；
+                flex-shrink为其他值的子区域宽度按比例增加或减少。
+            </p>
+            <div class="box">
+                <div class="shrink1 bd1">我的flex-shrink为1，将被缩小</div>
+                <div class="shrink0 bd2">我的flex-shrink为0，我不变</div>
+                <div class="shrink1 bd1">我的flex-shrink为1，将被缩小</div>
+                <div class="shrink2 bd2">我的flex-shrink为2，我最小啊啊啊啊啊</div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h3>项目中的flex-basis:就相当于设置自身的宽度属性，默认auto指自身宽度</h3>
+            <div class="box">
+                <div class="basis1 bd1">我想占2份</div>
+                <div class="basis2 bd2">我想占2份</div>
+            </div>
+        </div>
+
+        <p style="color:red"><b>flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。</b></p>
+        <p><b>该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。</b></p>
+    </body>
+</html>
+
+

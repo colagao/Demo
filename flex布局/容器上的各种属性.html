@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            .example{margin:40px 0;}
+            .box{display: flex;width:400px;background-color: #ccc;margin:40px  0 0 100px; border:1px solid red;}
+            .box div{padding:5px;}
+            .left{flex: 1;order: 1;}
+            .right{flex: 1;order: 1;}
+            .bd1{background-color: #ccc;border:1px solid cadetblue;}
+            .bd2{background-color: lightpink;border:1px solid brown;}
+            .direction{flex-direction: row;}
+            .wrap{flex-wrap: nowrap;}
+            .justifyContent{justify-content:flex-start }
+            .alignItems{align-items: stretch}
+
+            .bgRed{background-color: red;}  .bgBlue{background-color: blue;} .bgGreen{background-color: green;}
+            .alignContent{    align-content: center;flex-wrap: wrap;} 
+            .alignContent div{height: 70px;width: 400px;}
+        </style>
+    </head>
+    <body>
+        <div class="example">
+            <h3>flex-direction属性决定主轴的方向（即项目的排列方向），默认row</h3>
+            <p style="background-color: #ccc;width: 200px">flex-direction:row | row-reverse | column | column-reverse;</p>
+            <div class="box direction">
+                <div class="left bd1">1</div>
+                <div class="right bd2">2</div>
+                <div class="left bd1">3</div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h3>flex-wrap属性定义在一条轴线上排不下了如何换行</h3>
+            <ul>
+                <li>默认nowrap，不换行；在一条轴线内将内容填充完</li>
+                <li>wrap，换行。第一行在上面</li>
+                <li>wrap-reverse，也换行，但是第一行在下面</li>
+                <li>space-between，项目两端对齐，项目之间的间隔相等</li>
+                <li>space-around，每个项目两侧的间隔都相等，所以两个项目之间的间隔是项目与边框间隔的两倍</li>
+            </ul>
+            <div class="box wrap">
+                <div style="width:150px;height: 100px" class=" bd1">我是test11111</div>
+                <div style="width:150px;" class=" bd2">我是test22222</div>
+                <div style="width:200px;" class=" bd1">我是test3333</div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h3>justify-content属性定义了子项目在主轴上的对齐方式</h3>
+           <ul>
+               <li>默认flex-start,左对齐</li>
+               <li>flex-end,右对齐</li>
+               <li>center,居中对齐</li>
+           </ul>
+            <div class="box justifyContent">
+                <div style="width:50px;height: 80px" class=" bd1">1</div>
+                <div style="width:120px;height: 90px" class=" bd2">2</div>
+                <div style="width:100px;height: 60px" class=" bd1">3</div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h3>align-items属性定义了子项目在交叉轴（纵向）的对齐方式</h3>
+           <ul>
+               <li>flex-start,起点对齐</li>
+               <li>flex-end，交叉轴终点对齐</li>
+               <li>center，交叉轴方向居中对齐</li>
+               <li>base-line，第一行文字对齐</li>
+               <li>stretch，<b>默认值。</b>如果项目未设置高度，则项目在高度上将占满容器</li>
+           </ul>
+            <div class="box alignItems" style="height: 200px" >
+                <div style="width:50px;" class=" bd1">我是第一行</div>
+                <div style="width:120px;font-size:24px;" class=" bd2">第二</div>
+                <div style="width:100px;" class=" bd1">第三行啊啊啊</div>
+            </div>
+        </div>
+
+        <div class="example">
+            <h3>align-content属性定义了多个子项目存在时在交叉轴（纵向）的对齐方式</h3>
+            <div class="box alignContent" style="height: 300px" >
+               
+                <div class="bgBlue">div4</div><div  class="bgRed">div5</div><div class="bgGreen">div6</div>
+               
+            </div>
+        </div>
+    </body>
+</html>
