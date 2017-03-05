@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <script>
+
+        //鸭子类型指导我们应该只关注对象的行为，而不关注对象本身
+            var duck = {
+                ducking:function(){
+                    console.log('呱呱呱')
+                }
+            };
+            var chicken = {
+                ducking:function(){
+                    console.log('呱呱呱');
+                }
+            }
+            var arr = [];//合唱团
+            var joinArr = function(animal){
+                if(animal && typeof animal.ducking === 'function'){
+                    arr.push(animal);
+                    console.log('恭喜加入合唱团');
+                    console.log('合唱团已有成员数量：'+arr.length);
+                }
+            }
+
+            joinArr(duck);
+            joinArr(chicken);
+        </script>
+    </body>
+</html>
