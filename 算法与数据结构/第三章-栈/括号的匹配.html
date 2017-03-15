@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <script src="./stack.js"></script>
+        <script>
+            function symbolMatch(symbols){
+                var index = 0,
+                    symbol,    
+                    top,
+                    balance = true,
+                    symbolStack = new Stack(),
+                    openSymbol = '([{',
+                    closeSymbol = ')]}';
+                
+                while(index < symbols.length && balance){
+                    symbol = symbols.charAt(index);
+
+                    if(openSymbol.indexOf(symbol) >= 0){
+                        symbolStack.push(symbol);
+                    }else{
+                        if(symbolStack.isEmpty()){
+                            balance = false;
+                        }else{                          
+                            top = symbolStack.pop();
+                            if(!(closeSymbol.indexOf(symbol) === openSymbol.indexOf(top))){
+                                balance = false;
+                            }
+                        }
+                    }
+                    index++;
+                }
+                if(balance && symbolStack.isEmpty()){
+                    return true;
+                }
+                return false;
+            }
+
+            console.log(symbolMatch('[({})]'));  //true
+            console.log(symbolMatch('({[({]})'));  //false
+            console.log(symbolMatch('{{([][])}()}')); //true
+            console.log(symbolMatch('[{()]')); //false
+        </script> 
+    </body>
+</html>

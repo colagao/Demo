@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <script src="./stack.js"></script>
+        <script>
+            function divideBy2(number){
+                var stack = new Stack() ,
+                    remainder ,
+                    binaryString = '';
+                while(number > 0){
+                    remainder = Math.floor(number%2);
+                    stack.push(remainder);
+                    number = Math.floor(number/2);
+                }
+                while(!stack.isEmpty()){
+                    binaryString += stack.pop().toString();
+                }
+                return binaryString;
+            }
+            console.log(divideBy2(9));      //1001
+            console.log(divideBy2(65));     //1000001
+
+            function divideBy(number,baseNumber){
+                var numStack = new Stack();
+                var rem, baseString = '',
+                    digits ='0123456789ABCDEF';
+                while(number > 0){
+                    rem = Math.floor(number%baseNumber);
+                    numStack.push(rem);
+                    number = Math.floor(number/baseNumber);
+                }
+                while(!numStack.isEmpty()){
+                    baseString += digits[numStack.pop()];
+                }
+                return baseString;
+            }
+            console.log(divideBy(23,16));  //17
+            console.log(divideBy(108,16));  //6C
+            console.log(divideBy(23,2));    //10111
+            console.log(divideBy(23,8));    //27
+        </script>
+    </body>
+</html>
