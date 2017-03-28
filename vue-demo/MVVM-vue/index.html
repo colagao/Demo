@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div id="mvvm-app">
+             <p v-text="msg"></p>
+             <button v-on:click="changeMsg">change msg</button>
+             <br> <br>
+             <input v-model="myInput"/><br> <br>
+             输入框内容：<p v-text="myInput"></p>
+        </div>
+
+
+        <script src="./observe.js"></script>
+        <script src="./watcher.js"></script>
+        <script src="./compile.js"></script>
+        <script src="./mvvm.js"></script>
+        <script>
+            var vm = new MVVM({
+                el: '#mvvm-app',
+                data:{
+                    msg:'hello',
+                    myInput:''
+                },
+                methods:{
+                    changeMsg(){
+                        this.msg = 'i have changed!'
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
