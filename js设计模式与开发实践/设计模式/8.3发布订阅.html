@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+       
+    <script>
+        /*
+            将发布-订阅功能抽出来
+        */
+
+        var event = {
+            cacheList:[],
+            listen:function(key,fn){
+                if(!this.cacheList[key]){
+                    this.cacheList[key] = [];
+                }
+                this.cacheList[key].push(fn);
+            },
+            trigger:function(){
+                var key = Array.prototype.shift.call(arguments),
+                    fns = this.cacheList[key];
+                    
+                if(!fns || fns.lenghth === 0){
+                   
+                    return false;
+                }
+                for(var i = 0,fn;fn = fns[i++];){
+                    fn.apply(this,arguments);
+                }
+            },
+            //增加一个取消订阅
+            remove:function(key,fn){
+                var fns = this.cacheList[key];
+                if(!fns){
+                    return false;
+                }
+                if(!fn){
+                    fns && (fns.length = 0);           //如果没有传入具体回调函数，则取消对应key的所有回调。
+                }else{
+                    for(var l=fns.length-1;l>=0;l--){
+                        if(fn === fns[l]){
+                            fns.splice(l,1);            //删除回调
+                        }
+                    }
+                }
+            }
+        };
+
+        //给对象动态添加发布-订阅功能
+        var installEvent = function(obj){
+            for(var i in event){
+                obj[i] = event[i];
+            }
+        };
+
+        var saleOffice = {};
+        saleOffice.a = 100;
+        installEvent(saleOffice);
+
+         //小明只订阅98平米的房子
+       saleOffice.listen('sq98',fn1 = function(price,sq){
+            console.log('小明，价格：'+price+"====面积："+sq);
+       })
+
+       //小红只订阅118平米的房子
+       saleOffice.listen('sq118',fn2 = function(price,sq){
+            console.log('小红，价格：'+price+'---面积：'+sq);
+       })
+
+       //小刚订阅98平的房子
+       saleOffice.listen('sq98',fn3 = function(price,sq){
+            console.log('小刚，价格：'+price+'---面积：'+sq);
+       })
+       saleOffice.trigger('sq98',2000000,98);
+       saleOffice.trigger('sq118',3000000,118);
+       /*输出：
+            小明，价格：2000000====面积：98
+            小刚，价格：2000000---面积：98
+            小红，价格：3000000---面积：118
+       */
+       console.log('===============================================')
+
+       saleOffice.remove('sq98',fn1);               //小明取消订阅,（不传入fn1，则‘sq98’对应的回调都删除，小刚也不会收到发布的消息）
+
+       saleOffice.trigger('sq98',2000000,98);
+       saleOffice.trigger('sq118',3000000,118);
+       /*
+            小刚，价格：2000000---面积：98
+            小红，价格：3000000---面积：118
+       */
+    </script>
+    </body>
+</html>

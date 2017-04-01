@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+       
+    <script>
+        /*
+            从1的输出中可以看出，每个订阅者都收到了发布者发布的所有消息，有的消息其实并不是订阅者想要的。
+            所以可以增加一个key标识，让订阅者只收到自己订阅的信息。
+        */
+       
+        var saleOffice = {};                        //售楼处
+        saleOffice.cacheList = [];                     //缓存列表
+
+       //增加订阅者
+       saleOffice.listen = function(key,fn){
+           if(!this.cacheList[key]){
+                this.cacheList[key] = [];               //如果没有订阅此类消息，则创建一个缓存列表
+           }
+            this.cacheList[key].push(fn);               //订阅的消息添加进消息列表
+       }
+
+       //发布消息遍历列表
+       saleOffice.trigger = function(){
+
+           var key = Array.prototype.shift.call(arguments);            //取出消息类型
+               fns = this.cacheList[key]                               //对应的消息列表
+
+            if(!fns || fns.lenghth == 0){
+                return false;
+            }
+
+            for(var i = 0,fn; fn = fns[i++];){
+                fn.apply(this,arguments);                           //此处的arguments是发布消息时传递的参数
+            }
+       }
+
+       //test
+       //小明只订阅98平米的房子
+       saleOffice.listen('sq98',function(price,sq){
+            console.log('价格：'+price+"====面积："+sq);
+       })
+
+       //小红只订阅118平米的房子
+       saleOffice.listen('sq118',function(price,sq){
+            console.log('价格：'+price+'---面积：'+sq);
+       })
+
+       saleOffice.trigger('sq98',2000000,98);
+       saleOffice.trigger('sq118',3000000,118);
+
+       /*输出 :
+            价格：2000000====面积：98
+            价格：3000000---面积：118
+       */
+    </script>
+    </body>
+</html>

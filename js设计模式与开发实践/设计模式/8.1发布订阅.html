@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+       
+    <script>
+        /*  
+            例子：小明、小红等购买者都是订阅者，他们订阅了房子开售的消息。售楼处作为发布者，
+                  会在合适的时候遍历花名册上的电话号码，依次给购房者发布消息。
+
+
+            1.指定谁是发布者（售楼处）
+            2.为发布者准备一个缓存列表用来存储回调函数以通知订阅者（花名册）
+            3.最后发布消息就遍历缓存列表，触发每个订阅者的回调函数。
+        */
+       
+       var saleOffice = {};             //定义售楼处
+       saleOffice.cacheList = [];       //缓存列表
+
+       //增加订阅者
+       saleOffice.listen = function(fn){
+            this.cacheList.push(fn);
+       }
+
+       //发布消息遍历列表
+       saleOffice.trigger = function(){
+            for(var i = 0,fn; fn = this.cacheList[i++];){
+                fn.apply(this,arguments);
+            }
+       }
+
+       //test
+       //小明订阅
+       saleOffice.listen(function(price,sq){
+            console.log('价格：'+price+"---面积："+sq);
+       })
+
+       //小红订阅
+       saleOffice.listen(function(price,sq){
+            console.log('价格：'+price+'---面积：'+sq);
+       })
+
+       //售楼处发布售楼消息
+       saleOffice.trigger(2000000,98);
+       saleOffice.trigger(3000000,118);
+
+       /*输出：
+            价格：2000000---面积：98
+            价格：2000000---面积：98
+            价格：3000000---面积：118
+            价格：3000000---面积：118
+       */
+    </script>
+    </body>
+</html>

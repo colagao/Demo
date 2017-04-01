@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <button id="count">点我</button>
+        <div id="show"></div>
+    <script>
+        var Event = {
+            cacheList:[],
+            listen:function(key,fn){
+                if(!this.cacheList[key]){
+                    this.cacheList[key] = [];
+                }
+                this.cacheList[key].push(fn);
+            },
+            trigger:function(){
+                var key = Array.prototype.shift.apply(arguments),
+                    fns = this.cacheList[key];
+                
+                if(!fns || fns.length ===0){
+                    return false;
+                }
+                for(var i = 0,fn;fn = fns[i++];){
+                    fn.apply(this,arguments);
+                }
+            },
+            remove:function(key,fn){
+                var fns = this.cacheList[key]
+                if(!fns){
+                    return false;
+                }
+                if(!fn){
+                    fns && (fns.lengh = 0)
+                }else{
+                    for(var l=fns.length-1;l>=0;l--){
+                        if(fn == fns[l]){
+                            fns.splice(l,1);
+                        }
+                    }
+                }
+            }
+        }
+        var a = (function(){
+            var count = 1;
+            var btn = document.getElementById("count");
+            btn.onclick = function(){
+                Event.trigger('add',count++);
+            }
+        })();
+
+        var b = (function(){
+            var div = document.getElementById("show");
+            Event.listen('add',function(count){
+                div.innerHTML = count;
+            })
+        })()
+    </script>
+    </body>
+</html>
